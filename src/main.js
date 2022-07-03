@@ -4,6 +4,7 @@ navigator.mediaDevices.getUserMedia({'video': true})
     const c = 'createElement';
 
     const setPositions = () => grid.map((g, i) =>
+      // font-size: 0; fixes extra padding in mobile Safari
       g.style.cssText = `
         position: absolute;
         overflow: hidden;
