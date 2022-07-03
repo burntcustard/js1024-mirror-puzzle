@@ -11,6 +11,7 @@ navigator.mediaDevices.getUserMedia({'video': true})
         height: 1in;
         transition: all .4s;
         transform: translate(${i%3}in, ${~~(i/3)}in);
+        font-size: 0;
         padding: 0;
       `
     )
