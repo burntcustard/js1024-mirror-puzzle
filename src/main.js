@@ -24,7 +24,7 @@ navigator.mediaDevices.getUserMedia({'video': true})
       if (i<8) {
         const videoElement = d[c]('video');
         const {height, width} = mediaStream.getTracks()[0].getSettings();
-        alert(`height: ${height}, width: ${width}`);
+        alert(`Number of tracks: ${mediaStream.getTracks().length}, height: ${height}, width: ${width}`);
 
         videoContainer.append(videoElement);
         videoElement.srcObject = mediaStream;
