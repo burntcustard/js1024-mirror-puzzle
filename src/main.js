@@ -23,11 +23,11 @@ navigator.mediaDevices.getUserMedia({'video': true})
       a.append(videoContainer);
       if (i<8) {
         const videoElement = d[c]('video');
+        videoContainer.append(videoElement);
+        videoElement.srcObject = mediaStream;
         const {height, width, aspectRatio} = mediaStream.getTracks()[0].getSettings();
         alert(`Number of tracks: ${mediaStream.getTracks().length}, height: ${height}, width: ${width}, aspectRatio: ${aspectRatio}`);
 
-        videoContainer.append(videoElement);
-        videoElement.srcObject = mediaStream;
 
         if (width < height) {
           videoElement.width = 288;
