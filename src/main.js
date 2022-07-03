@@ -1,8 +1,8 @@
-let d = document;
-let c = 'createElement';
-
 navigator.mediaDevices.getUserMedia({'video': true})
   .then(mediaStream => {
+    const d = document;
+    const c = 'createElement';
+
     const setPositions = () => grid.map((g, i) =>
       g.style.cssText = `
         position: absolute;
