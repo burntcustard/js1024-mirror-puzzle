@@ -22,7 +22,7 @@ navigator.mediaDevices.getUserMedia({'video': true})
         let videoElement = document.createElement('video');
         videoContainer.append(videoElement);
         videoElement.srcObject = mediaStream;
-        videoElement.height = 300;
+        videoElement.height = 288;
         videoElement.style.transform = `
           translate(-${i % 3}in, -${~~(i/3)}in) scaleX(-1)
         `;
