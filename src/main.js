@@ -61,7 +61,7 @@ navigator.mediaDevices.getUserMedia({'video': true})
     b.onclick = () => {
       grid.sort(() => Math.random() - 0.5);
       setPositions();
-      b.innerText = 'Reshuffle';
+      b.innerText = 'Shuffle';
     }
 
     setPositions();
