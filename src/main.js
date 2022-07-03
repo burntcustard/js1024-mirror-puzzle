@@ -14,7 +14,7 @@ navigator.mediaDevices.getUserMedia({'video': true})
         padding: 0;
       `
     )
-    let grid = [];
+    const grid = [];
 
     for (let i = 0; i < 9; i++) {
       let videoContainer = d[c]('button');
@@ -22,10 +22,12 @@ navigator.mediaDevices.getUserMedia({'video': true})
       videoContainer.i = i;
       a.append(videoContainer);
       if (i<8) {
-        let videoElement = d[c]('video');
+        const videoElement = d[c]('video');
+        const {height, width} = mediaStream.getTracks()[0].getSettings();
+
         videoContainer.append(videoElement);
         videoElement.srcObject = mediaStream;
-        let {height, width} = mediaStream.getTracks()[0].getSettings();
+
         if (width > height) {
           videoElement.height = 288;
         } else {
@@ -35,9 +37,11 @@ navigator.mediaDevices.getUserMedia({'video': true})
           translate(-${i % 3}in, -${~~(i/3)}in) scaleX(-1)
         `;
         videoElement.oncanplay = () => videoElement.play();
+
         videoContainer.onclick = () => {
           let vIndex = grid.indexOf(videoContainer);
           let gIndex = grid.findIndex(item => item.i === 8);
+
           if (
             vIndex > 2 && grid[vIndex - 3].i === 8 ||
             vIndex < 6 && grid[vIndex + 3].i === 8 ||
