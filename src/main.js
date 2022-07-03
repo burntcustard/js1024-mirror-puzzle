@@ -19,10 +19,14 @@ navigator.mediaDevices.getUserMedia({'video': true})
     )
 
     for (let i = 0; i < 9; i++) {
+      // videoContainer is a button (with webcam video inside), or it's a gap <i>
+      // because that's a single-letter HTML tagname with little semantic meaning
       let videoContainer = d[c](i < 8 ? 'button' : 'i');
+
       grid.push(videoContainer);
       videoContainer.i = i;
       a.append(videoContainer);
+
       if (i < 8) {
         const videoElement = d[c]('video');
 
