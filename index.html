@@ -1,32 +1,22 @@
 <!DOCTYPE html>
 
 <html>
-  <head>
-    <style>
-      #a button {
-        position: absolute;
-        overflow: hidden;
-        width: 1in;
-        height: 1in;
-        transition: all .5s;
-        margin-top: calc(var(--t) * 1in);
-        margin-left: calc(var(--l) * 1in);
-        padding: 0;
-      }
-
-      video {
-        transform: scaleX(-1);
-      }
-    </style>
-  </head>
-
   <body>
     <div id="a" style="display:flex"></div>
     <script>
       navigator.mediaDevices.getUserMedia({video: true})
         .then(mediaStream => {
           const setPositions = () => grid.map((g, i) =>
-            g.style.cssText = `--t:${~~(i/3)};--l:${i%3}`
+            g.style.cssText = `--t:${~~(i/3)};--l:${i%3};` + `
+              position: absolute;
+              overflow: hidden;
+              width: 1in;
+              height: 1in;
+              transition: all .5s;
+              margin-top: calc(var(--t) * 1in);
+              margin-left: calc(var(--l) * 1in);
+              padding: 0;
+            `
           )
           let grid = [];
 
@@ -42,6 +32,7 @@
               videoElement.height = 300;
               videoElement.style.marginTop = `${(~~(i/3)) * -1}in`;
               videoElement.style.marginLeft = `${(i % 3) * -1}in`;
+              videoElement.style.transform = 'scaleX(-1)';
               videoElement.oncanplay = () => videoElement.play();
               videoContainer.onclick = () => {
                 let vIndex = grid.indexOf(videoContainer);
