@@ -3,8 +3,12 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "watch": "browser-sync -w"
+    "build": "node build.js",
+    "watch:bs": "browser-sync -w",
+    "watch:js": "chokidar **/*.js -c 'node build.js' --initial",
+    "watch": "npm-run-all --parallel watch:bs watch:js"
   },
   "repository": {
     "type": "git",
@@ -17,6 +21,10 @@
   },
   "homepage": "https://github.com/burntcustard/js1024-mirror-puzzle#readme",
   "devDependencies": {
-    "browser-sync": "^2.27.10"
+    "browser-sync": "^2.27.10",
+    "chokidar-cli": "^3.0.0",
+    "html-minifier": "^4.0.0",
+    "npm-run-all": "^4.1.5",
+    "terser": "^5.14.1"
   }
 }
