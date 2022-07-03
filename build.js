@@ -48,7 +48,7 @@ const minifiedInlined = minifyHtml(inlined, {
 
 const mangled = minifiedInlined
   .replaceAll('for(let ', 'for(') // Hoist for() vars to global (very risky) ~4B
-  .replace('=>{let ', '=>{') // Hoist button onclick let (very risky) ~4B
+  .replaceAll('=>{let ', '=>{') // Hoist button onclick lets (very risky) ~8B
   .replace('<!DOCTYPE html><html>', '') // Remove doctype & HTML opening tags
   .replace(';</script>', '</script>') // Remove final semicolon
   .replace('<head>', '') // Remove head opening tag

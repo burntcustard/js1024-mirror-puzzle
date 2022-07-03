@@ -17,7 +17,7 @@ navigator.mediaDevices.getUserMedia({'video': true})
     const grid = [];
 
     for (let i = 0; i < 9; i++) {
-      let videoContainer = d[c]('button');
+      let videoContainer = d[c](i < 8 ? 'button' : 'i');
       grid.push(videoContainer);
       videoContainer.i = i;
       a.append(videoContainer);
