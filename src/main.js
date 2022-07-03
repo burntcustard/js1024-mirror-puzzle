@@ -40,18 +40,18 @@ navigator.mediaDevices.getUserMedia({'video': true})
             [grid[vIndex], grid[gIndex]] = [grid[gIndex], grid[vIndex]];
             setPositions();
             if (grid.every((elem, index) => elem.i === index)) {
-              console.log('you win');
+              b.innerText = 'Congrats, you win! Try again?';
             }
           }
         };
       }
     }
 
-    setPositions();
-
-    window.setTimeout(() => {
-      // grid.sort(() => Math.random() - 0.5);
-      [grid[7], grid[8]] = [grid[8], grid[7]];
+    b.onclick = () => {
+      grid.sort(() => Math.random() - 0.5);
       setPositions();
-    }, 2000);
+      b.innerText = 'Reshuffle';
+    }
+
+    setPositions();
   });
