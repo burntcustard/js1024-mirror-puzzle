@@ -29,6 +29,7 @@ navigator.mediaDevices.getUserMedia({'video': true})
         videoContainer.append(videoElement);
         videoElement.srcObject = mediaStream;
 
+        // scaleX(-1) flips webcam around to make it "mirrored"
         videoElement.style.transform = `
           translate(-${i % 3}in, -${~~(i / 3)}in) scaleX(-1)
         `;
