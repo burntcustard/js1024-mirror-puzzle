@@ -47,11 +47,10 @@ const minifiedInlined = minifyHtml(inlined, {
 });
 
 const mangled = minifiedInlined
-  .replace('<!DOCTYPE html><html>', '') // Remoe doctype & opening tags
+  .replace('<!DOCTYPE html><html>', '') // Remove doctype & opening tags
   .replace(';</script>', '</script>') // Remove final semicolon
   .replace('</body></html>', ''); // Remove closing tags
 
 console.log(`${mangled.length}B`);
 
-writeFileSync('index.mangled.html', mangled);
-writeFileSync('index.html', minifiedInlined);
+writeFileSync('index.html', mangled);
