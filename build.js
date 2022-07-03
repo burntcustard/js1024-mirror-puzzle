@@ -47,7 +47,7 @@ const minifiedInlined = minifyHtml(inlined, {
 });
 
 const mangled = minifiedInlined
-  .replace('<!DOCTYPE html><html><body>', '') // Remoe doctype & opening tags
+  .replace('<!DOCTYPE html><html>', '') // Remoe doctype & opening tags
   .replace(';</script>', '</script>') // Remove final semicolon
   .replace('</body></html>', ''); // Remove closing tags
 
