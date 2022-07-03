@@ -7,8 +7,7 @@ navigator.mediaDevices.getUserMedia({'video': true})
         width: 1in;
         height: 1in;
         transition: all .5s;
-        margin-top: ${~~(i/3)}in;
-        margin-left: ${i%3}in;
+        transform: translate(${i%3}in, ${~~(i/3)}in);
         padding: 0;
       `
     )
@@ -24,9 +23,9 @@ navigator.mediaDevices.getUserMedia({'video': true})
         videoContainer.append(videoElement);
         videoElement.srcObject = mediaStream;
         videoElement.height = 300;
-        videoElement.style.marginTop = `${(~~(i/3)) * -1}in`;
-        videoElement.style.marginLeft = `${(i % 3) * -1}in`;
-        videoElement.style.transform = 'scaleX(-1)';
+        videoElement.style.transform = `
+          translate(-${i % 3}in, -${~~(i/3)}in) scaleX(-1)
+        `;
         videoElement.oncanplay = () => videoElement.play();
         videoContainer.onclick = () => {
           let vIndex = grid.indexOf(videoContainer);
@@ -40,7 +39,7 @@ navigator.mediaDevices.getUserMedia({'video': true})
             [grid[vIndex], grid[gIndex]] = [grid[gIndex], grid[vIndex]];
             setPositions();
             if (grid.every((elem, index) => elem.i === index)) {
-              b.innerText = 'Congrats, you win! Try again?';
+              b.innerText = 'You win! Try again?';
             }
           }
         };

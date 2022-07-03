@@ -19,11 +19,18 @@ const options = {
   },
 };
 
-const js = readFileSync('src/main.js', 'utf8');
+let js = readFileSync('src/main.js', 'utf8');
 
-const cleanJs = js.replace(/g.style.cssText = `[^`]+`/g, tag => tag.replace(/\s+/g, ''));
+// Some custom mangling of JS to assist / work around Terser
+js = js
+  // Remove whitespace in CSS template literals
+  .replace(/ = `[^`]+`/g, tag => tag.replace(/\s+/g, ''))
+  // Replace const with let
+  .replaceAll('const', 'let')
+  // Replace all strict equality comparison with abstract equality comparison
+  .replaceAll('===', '==');
 
-const minifiedJs = await minifyJs(cleanJs, options);
+const minifiedJs = await minifyJs(js, options);
 
 const html = readFileSync('src/index.html', 'utf8');
 
@@ -37,6 +44,12 @@ const minifiedInlined = minifyHtml(inlined, {
   collapseWhitespace: true,
 });
 
-console.log(`${minifiedInlined.length}B`);
+const mangled = minifiedInlined
+  .replace('<!DOCTYPE html><html><body>', '') // Remoe doctype & opening tags
+  .replace(';</script>', '</script>') // Remove final semicolon
+  .replace('</body></html>', ''); // Remove closing tags
 
+console.log(`${mangled.length}B`);
+
+writeFileSync('index.mangled.html', mangled);
 writeFileSync('index.html', minifiedInlined);
