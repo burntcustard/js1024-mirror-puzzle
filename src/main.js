@@ -1,3 +1,5 @@
+let createElement = document.createElement;
+
 navigator.mediaDevices.getUserMedia({'video': true})
   .then(mediaStream => {
     const setPositions = () => grid.map((g, i) =>
@@ -14,12 +16,12 @@ navigator.mediaDevices.getUserMedia({'video': true})
     let grid = [];
 
     for (let i = 0; i < 9; i++) {
-      let videoContainer = document.createElement('button');
+      let videoContainer = createElement('button');
       grid.push(videoContainer);
       videoContainer.i = i;
       a.append(videoContainer);
       if (i<8) {
-        let videoElement = document.createElement('video');
+        let videoElement = createElement('video');
         videoContainer.append(videoElement);
         videoElement.srcObject = mediaStream;
         let {height, width} = mediaStream.getTracks()[0].getSettings();
