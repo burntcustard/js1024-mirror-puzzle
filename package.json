@@ -1,0 +1,22 @@
+{
+  "name": "js1024-mirror-puzzle",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "watch": "browser-sync -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/burntcustard/js1024-mirror-puzzle.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/burntcustard/js1024-mirror-puzzle/issues"
+  },
+  "homepage": "https://github.com/burntcustard/js1024-mirror-puzzle#readme",
+  "devDependencies": {
+    "browser-sync": "^2.27.10"
+  }
+}
