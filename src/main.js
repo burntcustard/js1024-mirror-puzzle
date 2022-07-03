@@ -2,6 +2,7 @@ navigator.mediaDevices.getUserMedia({'video': true})
   .then(mediaStream => {
     const d = document;
     const c = 'createElement';
+    const grid = [];
 
     const setPositions = () => grid.map((g, i) =>
       // font-size: 0; fixes extra padding in mobile Safari
@@ -16,14 +17,13 @@ navigator.mediaDevices.getUserMedia({'video': true})
         padding: 0;
       `
     )
-    const grid = [];
 
     for (let i = 0; i < 9; i++) {
       let videoContainer = d[c](i < 8 ? 'button' : 'i');
       grid.push(videoContainer);
       videoContainer.i = i;
       a.append(videoContainer);
-      if (i<8) {
+      if (i < 8) {
         const videoElement = d[c]('video');
 
         videoContainer.append(videoElement);
@@ -63,7 +63,7 @@ navigator.mediaDevices.getUserMedia({'video': true})
 
             // If every item in the grid is in order, they're arranged correctly
             if (grid.every((elem, index) => elem.i === index)) {
-              b.innerText = 'You win! Try again?';
+              b.innerText = 'Sorted! Try again?';
             }
           }
         };
