@@ -23,20 +23,25 @@ navigator.mediaDevices.getUserMedia({'video': true})
       a.append(videoContainer);
       if (i<8) {
         const videoElement = d[c]('video');
-        const {height, width} = mediaStream.getTracks()[0].getSettings();
 
         videoContainer.append(videoElement);
         videoElement.srcObject = mediaStream;
 
-        if (width < height) {
-          videoElement.width = 288;
-        } else {
-          videoElement.height = 288;
-        }
         videoElement.style.transform = `
-          translate(-${i % 3}in, -${~~(i/3)}in) scaleX(-1)
+          translate(-${i % 3}in, -${~~(i / 3)}in) scaleX(-1)
         `;
-        videoElement.oncanplay = () => videoElement.play();
+
+        videoElement.oncanplay = () => {
+          videoElement.play();
+
+          const computedStyle = getComputedStyle(videoElement);
+
+          if (computedStyle.width > computedStyle.height) {
+            videoElement.height = 288;
+          } else {
+            videoElement.width = 288;
+          }
+        }
 
         videoContainer.onclick = () => {
           let vIndex = grid.indexOf(videoContainer);

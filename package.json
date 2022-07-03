@@ -6,9 +6,10 @@
   "type": "module",
   "scripts": {
     "build": "node build.js",
-    "watch:bs": "browser-sync -w",
-    "watch:js": "chokidar **/*.js -c 'node build.js' --initial",
-    "watch": "npm-run-all --parallel watch:bs watch:js"
+    "sync": "browser-sync -w --index index.watch.html",
+    "watch-js": "chokidar **/*.js -c 'node build.js'",
+    "dev": "npm-run-all --parallel watch-js sync",
+    "watch": "npm-run-all build dev"
   },
   "repository": {
     "type": "git",
