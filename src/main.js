@@ -28,10 +28,10 @@ navigator.mediaDevices.getUserMedia({'video': true})
         videoContainer.append(videoElement);
         videoElement.srcObject = mediaStream;
 
-        if (width > height) {
-          videoElement.height = 288;
-        } else {
+        if (width < height) {
           videoElement.width = 288;
+        } else {
+          videoElement.height = 288;
         }
         videoElement.style.transform = `
           translate(-${i % 3}in, -${~~(i/3)}in) scaleX(-1)
