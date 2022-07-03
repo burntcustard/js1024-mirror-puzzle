@@ -40,9 +40,9 @@ navigator.mediaDevices.getUserMedia({'video': true})
           const computedStyle = getComputedStyle(videoElement);
 
           if (computedStyle.width > computedStyle.height) {
-            videoElement.height = 288;
+            videoElement.height = 288; // Approx 3in
           } else {
-            videoElement.width = 288;
+            videoElement.width = 288; // Approx 3in
           }
         }
 
@@ -56,8 +56,12 @@ navigator.mediaDevices.getUserMedia({'video': true})
             vIndex % 3 > 0 && grid[vIndex - 1].i === 8 ||
             vIndex % 3 < 2 && grid[vIndex + 1].i === 8
           ) {
+            // Swap clicked video container and empty container grid item
             [grid[vIndex], grid[gIndex]] = [grid[gIndex], grid[vIndex]];
+
             setPositions();
+
+            // If every item in the grid is in order, they're arranged correctly
             if (grid.every((elem, index) => elem.i === index)) {
               b.innerText = 'You win! Try again?';
             }
