@@ -2,6 +2,7 @@ navigator.mediaDevices.getUserMedia({'video': true})
   .then(mediaStream => {
     const d = document;
     const c = 'createElement';
+    const p = parseInt;
     const grid = [];
 
     const setPositions = () => grid.map((g, i) =>
@@ -43,7 +44,7 @@ navigator.mediaDevices.getUserMedia({'video': true})
 
           const computedStyle = getComputedStyle(videoElement);
 
-          if (parseInt(computedStyle.width) > parseInt(computedStyle.height)) {
+          if (p(computedStyle.width) > p(computedStyle.height)) {
             videoElement.height = 288; // Approx 3in
           } else {
             videoElement.width = 288; // Approx 3in
