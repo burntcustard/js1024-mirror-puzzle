@@ -1,6 +1,6 @@
 # js1024-mirror-puzzle
 
-Created for [js1024](https://js1024.fun) - the total size of index.html is (as of writing) 1019B. 
+Created for [js1024](https://js1024.fun) - the total size of index.html is less than 1024B!
 
 ## [Play online](https://burnt.io/js1024-mirror-puzzle)
 
