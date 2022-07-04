@@ -44,6 +44,9 @@ navigator.mediaDevices.getUserMedia({'video': true})
           requestAnimationFrame(() => {
             const computedStyle = getComputedStyle(videoElement);
 
+            console.log(videoElement);
+            console.log(`width: ${width}, height: ${height}`);
+
             if (computedStyle.width > computedStyle.height) {
               videoElement.height = 288; // Approx 3in
             } else {
