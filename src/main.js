@@ -17,7 +17,7 @@ navigator.mediaDevices.getUserMedia({'video': true})
         font-size: 0;
         padding: 0;
       `
-    )
+    );
 
     for (let i = 0; i < 9; i++) {
       // videoContainer is a button (with webcam video inside), or it's a gap <i>
