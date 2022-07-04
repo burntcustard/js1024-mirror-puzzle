@@ -10,7 +10,6 @@ _Note: Device must have a camera, and you must allow the site to use the camera,
 
 - Causing camera dimensions to change (for example by rotating a device) may result in grey bars appearing. Refreshing the page fixes this, but also resets tile positions.
 - Video position is not vertically and horizontally centered, but instead is aligned to the top left. This can mean you have to tilt the camera slightly more downwards on mobile, or to the right on desktop.
-- Only supported and tested on up-to-date Chrome, Firefox & Safari.
 
 ## Run locally
 
