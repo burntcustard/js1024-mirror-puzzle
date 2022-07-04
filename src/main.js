@@ -41,18 +41,13 @@ navigator.mediaDevices.getUserMedia({'video': true})
         videoElement.oncanplay = () => {
           videoElement.play();
 
-          requestAnimationFrame(() => {
-            const computedStyle = getComputedStyle(videoElement);
+          const computedStyle = getComputedStyle(videoElement);
 
-            console.log(videoElement);
-            console.log(`width: ${width}, height: ${height}`);
-
-            if (computedStyle.width > computedStyle.height) {
-              videoElement.height = 288; // Approx 3in
-            } else {
-              videoElement.width = 288; // Approx 3in
-            }
-          });
+          if (parseInt(computedStyle.width) > parseInt(computedStyle.height)) {
+            videoElement.height = 288; // Approx 3in
+          } else {
+            videoElement.width = 288; // Approx 3in
+          }
         }
 
         videoContainer.onclick = () => {
