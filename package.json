@@ -2,7 +2,7 @@
   "name": "js1024-mirror-puzzle",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "index.html",
   "type": "module",
   "scripts": {
     "build": "node build.js",
@@ -15,7 +15,7 @@
     "type": "git",
     "url": "git+https://github.com/burntcustard/js1024-mirror-puzzle.git"
   },
-  "author": "",
+  "author": "burntcustard <burntcustard@gmail.com> (https://burnt.io)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/burntcustard/js1024-mirror-puzzle/issues"
