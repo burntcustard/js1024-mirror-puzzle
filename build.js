@@ -17,6 +17,9 @@ const options = {
     keep_quoted: true,
    },
   },
+  format: {
+    wrap_func_args: false,
+  },
 };
 
 let js = readFileSync('src/main.js', 'utf8');
