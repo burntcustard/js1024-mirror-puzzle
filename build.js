@@ -53,6 +53,11 @@ const mangled = minifiedInlined
   .replaceAll('for(let ', 'for(') // Hoist for() vars to global (very risky) ~4B
   .replaceAll('=>{let ', '=>{') // Hoist button onclick lets (very risky) ~8B
   .replace('let t=get', 't=get') // Hoist getComputedStyle var (very risky) ~4B
+  .replace('o=()=>', 'o=v=>') // Assign var to avoid ()
+  .replace('oncanplay=()', 'oncanplay=w') // Assign var to avoid ()
+  .replace('onclick=()', 'onclick=x') // Assign var to avoid ()
+  .replace('onclick=()', 'onclick=y') // Assign var to avoid ()
+  .replace('()=>Math.random', 'z=>Math.random') // Assign var to avoid ()
   .replace('<!DOCTYPE html><html>', '') // Remove doctype & HTML opening tags
   .replace(';</script>', '</script>') // Remove final semicolon
   .replace('<head>', '') // Remove head opening tag
