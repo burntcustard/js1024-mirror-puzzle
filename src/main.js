@@ -4,14 +4,16 @@ navigator.mediaDevices.getUserMedia({'video': true})
     const c = 'createElement';
     const p = parseInt;
     const grid = [];
+    const w = 'width';
+    const h = 'height';
 
     const setPositions = () => grid.map((g, i) =>
       // font-size: 0; fixes extra padding in mobile Safari
       g.style.cssText = `
         position: absolute;
         overflow: hidden;
-        width: 1in;
-        height: 1in;
+        ${w}: 1in;
+        ${h}: 1in;
         transition: all .4s;
         transform: translate(${i%3}in, ${~~(i/3)}in);
         font-size: 0;
@@ -44,11 +46,14 @@ navigator.mediaDevices.getUserMedia({'video': true})
 
           const computedStyle = getComputedStyle(videoElement);
 
-          if (p(computedStyle.width) > p(computedStyle.height)) {
-            videoElement.height = 288; // Approx 3in
-          } else {
-            videoElement.width = 288; // Approx 3in
-          }
+          // Replaced with single assignmet with a ternary below
+          // if (p(computedStyle.width) > p(computedStyle.height)) {
+          //   videoElement.height = 288; // Approx 3in
+          // } else {
+          //   videoElement.width = 288; // Approx 3in
+          // }
+
+          videoElement[p(computedStyle[w]) > p(computedStyle[h]) ? h : w] = 288;
         }
 
         videoContainer.onclick = () => {
