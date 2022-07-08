@@ -9,7 +9,7 @@ navigator.mediaDevices.getUserMedia({'video': true})
         width: 1in;
         position: absolute;
         overflow: hidden;
-        transition: all .4s;
+        transition: all .3s;
         transform: translate(${i%3}in, ${~~(i/3)}in);
         font-size: 0;
         padding: 0;
