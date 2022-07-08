@@ -23,9 +23,9 @@ navigator.mediaDevices.getUserMedia({'video': true})
     a.append(outer);
     outer.append(inner, shuffleButton);
 
-    outer.style.cssText = 'width:3in;background:#c10;border:2ex solid #c10;border-radius:2ex;display:grid;gap:4ex;box-shadow:0 0 1ex #0005;margin:3em auto';
-    inner.style.cssText = 'height:3in;box-shadow:0 0 1ex #0008 inset;filter:drop-shadow(0 0 1ex #0008)';
-    shuffleButton.style.cssText = 'height:3em';
+    outer.style.cssText = 'width:3in;background:#7ee;border:2ex solid #7ee;border-radius:2ex;display:grid;gap:4ex;box-shadow:0 0 1ex #1785;margin:3em auto';
+    inner.style.cssText = 'height:3in;box-shadow:0 0 1ex #178 inset;filter:drop-shadow(0 0 1ex #178)';
+    shuffleButton.style.cssText = 'height:3em;box-shadow:0 0 1ex #1785';
     shuffleButton.innerText = 'Shuffle';
 
     for (let i = 0; i < 9; i++) {
