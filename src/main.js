@@ -10,7 +10,7 @@ navigator.mediaDevices.getUserMedia({'video': true})
         position: fixed;
         overflow: hidden;
         transition: all .3s;
-        transform: translate(${i%3}in, ${~~(i/3)}in);
+        transform: translate(${i%3}in, ${i / 3 | 0}in);
         font-size: 0;
         padding: 0;
       `
@@ -45,7 +45,7 @@ navigator.mediaDevices.getUserMedia({'video': true})
 
         // scaleX(-1) flips webcam around to make it "mirrored"
         videoElement.style.cssText = `
-          transform:translate(-${i % 3}in, -${~~(i / 3)}in) scaleX(-1)
+          transform:translate(-${i % 3}in, -${i / 3 | 0}in) scaleX(-1)
         `;
 
         videoElement.oncanplay = () => {
@@ -62,13 +62,13 @@ navigator.mediaDevices.getUserMedia({'video': true})
 
         videoContainer.onclick = () => {
           let vIndex = grid.indexOf(videoContainer);
-          let gIndex = grid.findIndex(item => item.i === 8);
+          let gIndex = grid.findIndex(item => item.i & 8);
 
           if (
-            vIndex > 2 && grid[vIndex - 3].i === 8 ||
-            vIndex < 6 && grid[vIndex + 3].i === 8 ||
-            vIndex % 3 > 0 && grid[vIndex - 1].i === 8 ||
-            vIndex % 3 < 2 && grid[vIndex + 1].i === 8
+            vIndex - gIndex == -3 |
+            vIndex - gIndex == 3 |
+            vIndex - gIndex == -1 & vIndex % 3 < 2 |
+            vIndex - gIndex == 1 & vIndex % 3 > 0
           ) {
             // Swap clicked video container and empty container grid item
             [grid[vIndex], grid[gIndex]] = [grid[gIndex], grid[vIndex]];
