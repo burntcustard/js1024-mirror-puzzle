@@ -1,45 +1,53 @@
+const grid = [];
+const outer = document.createElement('div');
+const inner = document.createElement('div');
+const shuffleButton = document.createElement('button');
+
+const setPositions = () => grid.map((videoContainer, i) =>
+  // font-size: 0; fixes extra padding in mobile Safari
+  videoContainer.style.cssText = `
+    height: 1in;
+    width: 1in;
+    position: fixed;
+    overflow: hidden;
+    transition: all .3s;
+    transform: translate(${i%3}in, ${i / 3 | 0}in);
+    font-size: 0;
+    padding: 0;
+  `
+);
+
+a.append(outer);
+outer.append(inner, shuffleButton);
+
+outer.style.cssText = 'width:3in;background:#7dd;border:2ex solid #7dd;border-radius:2ex;display:grid;gap:4ex;box-shadow:0 0 1ex #1785;margin:3em auto';
+inner.style.cssText = 'height:3in;box-shadow:0 0 1ex #178 inset;filter:drop-shadow(0 0 1ex #178)';
+shuffleButton.style.cssText = 'height:3em;box-shadow:0 0 1ex #1785';
+shuffleButton.disabled = true;
+shuffleButton.innerText = 'Loading cam…';
+
+shuffleButton.onclick = () => {
+  grid.sort(() => Math.random() - 0.5);
+  setPositions();
+  shuffleButton.innerText = 'Shuffle';
+}
+
 navigator.mediaDevices.getUserMedia({'video': true})
   .then(mediaStream => {
-    const grid = [];
-
-    const setPositions = () => grid.map((g, i) =>
-      // font-size: 0; fixes extra padding in mobile Safari
-      g.style.cssText = `
-        height: 1in;
-        width: 1in;
-        position: fixed;
-        overflow: hidden;
-        transition: all .3s;
-        transform: translate(${i%3}in, ${i / 3 | 0}in);
-        font-size: 0;
-        padding: 0;
-      `
-    );
-
-    let outer = document.createElement('div');
-    let inner = document.createElement('div');
-    let shuffleButton = document.createElement('button');
-
-    a.append(outer);
-    outer.append(inner, shuffleButton);
-
-    outer.style.cssText = 'width:3in;background:#7dd;border:2ex solid #7dd;border-radius:2ex;display:grid;gap:4ex;box-shadow:0 0 1ex #1785;margin:3em auto';
-    inner.style.cssText = 'height:3in;box-shadow:0 0 1ex #178 inset;filter:drop-shadow(0 0 1ex #178)';
-    shuffleButton.style.cssText = 'height:3em;box-shadow:0 0 1ex #1785';
-    shuffleButton.innerText = 'Shuffle';
-
     for (let i = 0; i < 9; i++) {
       // videoContainer is a button (with webcam video inside), or it's a gap <i>
       // because that's a single-letter HTML tagname with little semantic meaning
-      let videoContainer = document.createElement(i < 8 ? 'button' : 'i');
+      const videoContainer = document.createElement(i < 8 ? 'button' : 'div');
+
+      // We don't actually use the video element unless i < 8, but having it declared
+      // next to the videoContainer, rather than in the if(), saves a few bytes
+      const videoElement = document.createElement('video');
 
       grid.push(videoContainer);
       videoContainer.i = i;
       inner.append(videoContainer);
 
       if (i < 8) {
-        const videoElement = document.createElement('video');
-
         videoContainer.append(videoElement);
         videoElement.srcObject = mediaStream;
 
@@ -84,11 +92,7 @@ navigator.mediaDevices.getUserMedia({'video': true})
       }
     }
 
-    shuffleButton.onclick = () => {
-      grid.sort(() => Math.random() - 0.5);
-      setPositions();
-      shuffleButton.innerText = 'Shuffle';
-    }
-
     setPositions();
+    shuffleButton.innerText = 'Shuffle';
+    shuffleButton.disabled = false;
   });
