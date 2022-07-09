@@ -24,7 +24,7 @@ outer.style.cssText = 'width:3in;background:#7dd;border:2ex solid #7dd;border-ra
 inner.style.cssText = 'height:3in;box-shadow:0 0 1ex #178 inset;filter:drop-shadow(0 0 1ex #178)';
 shuffleButton.style.cssText = 'height:3em;box-shadow:0 0 1ex #1785';
 shuffleButton.disabled = true;
-shuffleButton.innerText = 'Loading cam…';
+shuffleButton.innerText = 'Loading camera…';
 
 shuffleButton.onclick = () => {
   grid.sort(() => Math.random() - 0.5);
