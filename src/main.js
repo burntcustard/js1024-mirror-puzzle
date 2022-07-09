@@ -2,7 +2,25 @@ navigator.mediaDevices.getUserMedia({'video': true})
   .then(mediaStream => {
     const grid = [];
 
-    const setPositions = () => grid.map((g, i) =>
+    const setPositions = () => grid.map((g, vIndex) => {
+      let gIndex = grid.findIndex(item => item.i & 8);
+      let ns = vIndex - gIndex === -3 |
+               vIndex - gIndex === 3;
+      let ew = vIndex - gIndex === -1 & vIndex % 3 < 2 |
+               vIndex - gIndex === 1 & vIndex % 3 > 0
+
+      g.onclick = ns | ew ? () => {
+        // Swap clicked video container and empty container grid item
+        [grid[vIndex], grid[gIndex]] = [grid[gIndex], grid[vIndex]];
+
+        setPositions();
+
+        // If every item in the grid is in order, they're arranged correctly
+        if (grid.every((elem, index) => elem.i === index)) {
+          shuffleButton.innerText = 'Sorted! Try again?';
+        }
+      } : 0;
+
       // font-size: 0; fixes extra padding in mobile Safari
       g.style.cssText = `
         height: 1in;
@@ -10,11 +28,12 @@ navigator.mediaDevices.getUserMedia({'video': true})
         position: fixed;
         overflow: hidden;
         transition: all .3s;
-        transform: translate(${i%3}in, ${~~(i/3)}in);
+        transform: translate(${vIndex % 3}in, ${vIndex / 3 | 0}in);
         font-size: 0;
+        cursor: ${ns ? 'ns' : ew ? 'ew' : 0}-resize;
         padding: 0;
-      `
-    );
+      `;
+    });
 
     let outer = document.createElement('div');
     let inner = document.createElement('div');
@@ -22,7 +41,6 @@ navigator.mediaDevices.getUserMedia({'video': true})
 
     a.append(outer);
     outer.append(inner, shuffleButton);
-
     outer.style.cssText = 'width:3in;background:#7dd;border:2ex solid #7dd;border-radius:2ex;display:grid;gap:4ex;box-shadow:0 0 1ex #1785;margin:3em auto';
     inner.style.cssText = 'height:3in;box-shadow:0 0 1ex #178 inset;filter:drop-shadow(0 0 1ex #178)';
     shuffleButton.style.cssText = 'height:3em;box-shadow:0 0 1ex #1785';
@@ -45,7 +63,7 @@ navigator.mediaDevices.getUserMedia({'video': true})
 
         // scaleX(-1) flips webcam around to make it "mirrored"
         videoElement.style.cssText = `
-          transform:translate(-${i % 3}in, -${~~(i / 3)}in) scaleX(-1)
+          transform:translate(-${i % 3}in, -${i / 3 | 0}in) scaleX(-1)
         `;
 
         videoElement.oncanplay = () => {
@@ -59,28 +77,6 @@ navigator.mediaDevices.getUserMedia({'video': true})
 
           videoElement[parseInt(getComputedStyle(videoElement).width) > parseInt(getComputedStyle(videoElement).height) ? 'height' : 'width'] = 288;
         }
-
-        videoContainer.onclick = () => {
-          let vIndex = grid.indexOf(videoContainer);
-          let gIndex = grid.findIndex(item => item.i === 8);
-
-          if (
-            vIndex > 2 && grid[vIndex - 3].i === 8 ||
-            vIndex < 6 && grid[vIndex + 3].i === 8 ||
-            vIndex % 3 > 0 && grid[vIndex - 1].i === 8 ||
-            vIndex % 3 < 2 && grid[vIndex + 1].i === 8
-          ) {
-            // Swap clicked video container and empty container grid item
-            [grid[vIndex], grid[gIndex]] = [grid[gIndex], grid[vIndex]];
-
-            setPositions();
-
-            // If every item in the grid is in order, they're arranged correctly
-            if (grid.every((elem, index) => elem.i === index)) {
-              shuffleButton.innerText = 'Sorted! Try again?';
-            }
-          }
-        };
       }
     }
 
