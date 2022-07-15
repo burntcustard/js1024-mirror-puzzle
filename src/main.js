@@ -17,7 +17,7 @@ const setPositions = () => grid.map((videoContainer, i) =>
   `
 );
 
-a.append(outer);
+b.append(outer);
 outer.append(inner, shuffleButton);
 
 outer.style.cssText = 'width:3in;background:#7dd;border:2ex solid #7dd;border-radius:2ex;display:grid;gap:4ex;box-shadow:0 0 1ex #1785;margin:3em auto';
