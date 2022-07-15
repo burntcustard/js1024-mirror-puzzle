@@ -11,7 +11,7 @@ const setPositions = () => grid.map((videoContainer, i) =>
     position: fixed;
     overflow: hidden;
     transition: all .3s;
-    transform: translate(${i%3}in, ${i / 3 | 0}in);
+    transform: translate(${i % 3}in, ${i / 3 | 0}in);
     font-size: 0;
     padding: 0;
   `
