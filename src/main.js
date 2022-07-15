@@ -1,7 +1,7 @@
 const grid = [];
-const outer = document.createElement('div');
-const inner = document.createElement('div');
-const shuffleButton = document.createElement('button');
+const outer = document.createElement`div`;
+const inner = document.createElement`div`;
+const shuffleButton = document.createElement`button`;
 
 const setPositions = () => grid.map((videoContainer, i) =>
   // font-size: 0; fixes extra padding in mobile Safari
@@ -38,11 +38,11 @@ navigator.mediaDevices.getUserMedia({'video': true})
     for (let i = 0; i < 9; i++) {
       // videoContainer is a button (with webcam video inside), or it's a gap <i>
       // because that's a single-letter HTML tagname with little semantic meaning
-      const videoContainer = document.createElement(i < 8 ? 'button' : 'div');
+      const videoContainer = i < 8 ? document.createElement`button` : document.createElement`div`;
 
       // We don't actually use the video element unless i < 8, but having it declared
       // next to the videoContainer, rather than in the if(), saves a few bytes
-      const videoElement = document.createElement('video');
+      const videoElement = document.createElement`video`;
 
       grid.push(videoContainer);
       videoContainer.i = i;
