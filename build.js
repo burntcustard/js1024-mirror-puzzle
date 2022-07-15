@@ -31,8 +31,6 @@ js = js
   .replace(/ = `[^`]+`/g, tag => tag.replace(/\s+/g, ''))
   // Replace const with let
   .replaceAll('const', 'let')
-  // Hoist for() vars to global (very risky) ~4B
-  .replaceAll('for(let ', 'for(')
   // Replace all strict equality comparison with abstract equality comparison
   .replaceAll('===', '==')
   // Remove the last semicolon at the end of a CSS string
@@ -43,6 +41,8 @@ const minifiedJs = await minifyJs(js, options);
 const code = minifiedJs.code
   // Replace all double quotes with backticks for consistency
   .replaceAll('"', '`')
+  .replace('let e=[]', 'e=[]')
+  .replaceAll('for(let ', 'for(')
   // Remove final semicolon
   .replace(/;$/, '');
 
