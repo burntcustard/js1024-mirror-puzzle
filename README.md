@@ -1,6 +1,6 @@
 # js1024-mirror-puzzle
 
-Created for [js1024](https://js1024.fun) - the total size of [index.html](index.html) is less than 1024B!
+Winner of [js1024](https://js1024.fun/results/2022) - the total size of [index.html](index.html) is less than 1024B!
 
 ## [Play online](https://burnt.io/js1024-mirror-puzzle)
 
